@@ -4,12 +4,19 @@ using ScreenSound.Banco;
 
 try
 {
+    var context = new ScreenSoundContext();
     //using, ser executados durante somente onde estao registrados, mais gerenciamento. boa prática para garantir que objetos sejam usados e descartados com segurança, mesmo se ocorrerem erros dentro do bloco.
-    var artistaDAL = new ArtistaDAL();
-    artistaDAL.Adicionar(new Artista("Veigh", "trap"));
-    artistaDAL.Atualizar(new Artista("Djonga", "ruim"));
+    var artistaDAL = new ArtistaDAL(context);
+
+    var novoArtista = new Artista("Luigi cabrini", "Gostoso") { Id = 3};
+    ;
+
+    artistaDAL.Atualizar(novoArtista);
+    artistaDAL.Deletar(novoArtista);
+
+
     var ListaArtistas = artistaDAL.Listar();
-    
+   
     foreach(var artista in ListaArtistas)
     {
         Console.WriteLine(artista);
