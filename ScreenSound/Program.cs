@@ -4,12 +4,22 @@ using ScreenSound.Banco;
 
 try
 {
-    var connection = new Connection().ObterConexao();
+    //using, ser executados durante somente onde estao registrados, mais gerenciamento. boa prática para garantir que objetos sejam usados e descartados com segurança, mesmo se ocorrerem erros dentro do bloco.
+    var artistaDAL = new ArtistaDAL();
+    artistaDAL.Adicionar(new Artista("Veigh", "trap"));
+    artistaDAL.Atualizar(new Artista("Djonga", "ruim"));
+    var ListaArtistas = artistaDAL.Listar();
+    
+    foreach(var artista in ListaArtistas)
+    {
+        Console.WriteLine(artista);
+    }
 }
-catch (Exception)
+catch (Exception ex)
 {
-
+    Console.WriteLine(ex.Message);
 }
+return;
 
 Artista ira = new Artista("Ira!", "Banda Ira!");
 Artista beatles = new("The Beatles", "Banda The Beatles");

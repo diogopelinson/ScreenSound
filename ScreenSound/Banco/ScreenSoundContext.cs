@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using ScreenSound.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace ScreenSound.Banco
 {
-    internal class Connection
+    internal class ScreenSoundContext: DbContext
     {
         private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ScreenSound;Integrated Security=True;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-
-        public SqlConnection ObterConexao()
+        //Conexao pro banco com o Entity framework(ORM)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            return new SqlConnection(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
         }
+
     }
 }
